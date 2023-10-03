@@ -1,37 +1,44 @@
 <?php
-class Movie {
-    public $name;
+
+require_once __DIR__ . '/Production.php';
+require_once __DIR__ . '/Genre.php';
+
+
+
+class Movie extends Production
+{
+
+    public $length;
     public $year;
-    public $genres;
-    public $mainActors;
-    public $adultOnly;
-    function __construct(string $name, int $year, array $genres, Actors $mainActors, bool $adultOnly){
 
-        $this->name = $name;
+    public function __construct(
+        string $name,
+        Genre $genres,
+        string $country,
+        string $length,
+        int $year
+    ) {
+        parent::__construct(
+            $name,
+            $genres,
+            $country,
+        );
+        $this->length = $length;
         $this->year = $year;
-        $this->genres = $genres;
-        $this->mainActors = $mainActors;
-        $this->adultOnly = $adultOnly;
-
-
-    }
-    public function setAdult(){
-        if($this->adultOnly == true){
-            return  'Visione consigliata solo ai Maggiorenni';
-            
-        } else {
-             return  'Visione consigliata a tutti';
-           
-        }
     }
 
-    public function getGenres (){
+    public function getFullInfo()
+    {
 
-        $array_stringa = implode(',',$this->genres);
-        return $array_stringa;
+        $genre = $this->genres->getGenre();
+
+        return
+            "
+        <strong>Nome: </strong>$this->name<br>
+        <strong>Paese: </strong>$this->country<br>
+        <strong>Genere: </strong>$genre<br>
+        <strong>Durata: </strong>$this->length<br>
+        <strong>Anno: </strong>$this->year<br>
+        ";
     }
-
-
-
-
-}
+};
