@@ -86,7 +86,7 @@ $mixed = [
         <div class="row g-3">
             <?php foreach ($mixed as $Production) : ?>
             <div class="col-6 ">
-                <div class="card bg-danger p-3">
+                <div class="card bg-danger p-3 text-light">
                     <div class="card-body">
                         <?= $Production->getFullInfo() ?>
                     </div>
